@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.model.CCard;
 import com.example.model.CSubmissionUrl;
+import com.example.model.CTag;
 import com.example.repository.CCardRepository;
 import com.example.repository.CSubmissionUrlRepository;
+import com.example.repository.CTagRepository;
 
 @Service
 public class AtCoderMemoryService {
@@ -22,6 +24,10 @@ public class AtCoderMemoryService {
 	/* 提出 URL レポジトリ. */
 	@Autowired
 	CSubmissionUrlRepository submissionRepo;
+
+	/* タグレポジトリ. */
+	@Autowired
+	CTagRepository tagRepo;
 
 	public List<CCard> getCardList() {
 		return cardRepo.findAll();
@@ -54,8 +60,8 @@ public class AtCoderMemoryService {
 		return uuid;
 	}
 
-	public List<CSubmissionUrl> getSubmissionUrlList() {
-		return submissionRepo.findAll();
+	public List<CSubmissionUrl> getSubmissionUrlList( String uuid ) {
+		return submissionRepo.findByCardsUuid( uuid );
 	}
 
 	public String addSubmissionUrl(CSubmissionUrl cSubmissionUrl) throws Exception {
@@ -75,6 +81,31 @@ public class AtCoderMemoryService {
 		cSubmissionUrl.setUpdatedAt(now);
 
 		submissionRepo.save(cSubmissionUrl);
+
+		return uuid;
+	}
+
+	public List<CTag> getTagList( String uuid ) {
+		return tagRepo.findByCardsUuid( uuid );
+	}
+
+	public String addTag(CTag cTag) throws Exception {
+		if( cTag.getCardsUuid() == null ) {
+			throw new IllegalArgumentException("cardsUuid");
+		}
+		if( cTag.getTagName() == null ) {
+			throw new IllegalArgumentException("tagName");
+		}
+
+		String uuid = UUID.randomUUID().toString();
+		cTag.setUuid(uuid);
+
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		cTag.setCreatedAt(now);
+		cTag.setUpdatedAt(now);
+
+		tagRepo.save(cTag);
 
 		return uuid;
 	}
