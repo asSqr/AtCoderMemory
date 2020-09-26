@@ -1,1 +1,1 @@
-web: java -jar target/*.jar --spring.profiles.active=heroku
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/AtCoderMemory-0.0.1-SNAPSHOT.jar
