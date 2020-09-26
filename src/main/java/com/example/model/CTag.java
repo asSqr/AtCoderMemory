@@ -1,17 +1,13 @@
 package com.example.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 /**
  * The persistent class for the c_tags database table.
- *
+ * 
  */
 @Entity
 @Table(name="c_tags")
@@ -25,8 +21,14 @@ public class CTag implements Serializable {
 	@Column(name="cards_uuid")
 	private String cardsUuid;
 
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
 	@Column(name="tag_name")
 	private String tagName;
+
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
 
 	public CTag() {
 	}
@@ -47,12 +49,28 @@ public class CTag implements Serializable {
 		this.cardsUuid = cardsUuid;
 	}
 
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public String getTagName() {
 		return this.tagName;
 	}
 
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

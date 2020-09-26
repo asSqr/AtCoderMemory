@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.CCard;
+import com.example.model.CSubmissionUrl;
 import com.example.service.AtCoderMemoryService;
 
 @RestController
@@ -28,9 +29,17 @@ public class AtCoderMemoryController {
 	}
 
 	@RequestMapping(value = "/addCard", method = RequestMethod.POST)
-	public void addCard( @RequestBody CCard cCard ) {
-		service.addCard(cCard);
+	public String addCard(@RequestBody CCard cCard) throws Exception {
+		return service.addCard(cCard);
+	}
 
-		return;
+	@RequestMapping(value = "/getSubmissionUrlList", method = RequestMethod.GET)
+	public List<CSubmissionUrl> getSubmissionUrlList() {
+		return service.getSubmissionUrlList();
+	}
+
+	@RequestMapping(value = "/addSubmissionUrl", method = RequestMethod.POST)
+	public String addSubmissionUrl(@RequestBody CSubmissionUrl cSubmissionUrl) throws Exception {
+		return service.addSubmissionUrl(cSubmissionUrl);
 	}
 }

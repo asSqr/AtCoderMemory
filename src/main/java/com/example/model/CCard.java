@@ -1,16 +1,13 @@
 package com.example.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the c_cards database table.
- *
+ * 
  */
 @Entity
 @Table(name="c_cards")
@@ -25,11 +22,17 @@ public class CCard implements Serializable {
 
 	private String comment;
 
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
 	@Column(name="problem_url")
 	private String problemUrl;
 
 	@Column(name="solved_flag")
 	private Boolean solvedFlag;
+
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
 
 	public CCard() {
 	}
@@ -58,6 +61,14 @@ public class CCard implements Serializable {
 		this.comment = comment;
 	}
 
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public String getProblemUrl() {
 		return this.problemUrl;
 	}
@@ -72,6 +83,14 @@ public class CCard implements Serializable {
 
 	public void setSolvedFlag(Boolean solvedFlag) {
 		this.solvedFlag = solvedFlag;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

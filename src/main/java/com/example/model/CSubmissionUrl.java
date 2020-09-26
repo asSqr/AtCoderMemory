@@ -1,16 +1,13 @@
 package com.example.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the c_submission_urls database table.
- *
+ * 
  */
 @Entity
 @Table(name="c_submission_urls")
@@ -24,8 +21,14 @@ public class CSubmissionUrl implements Serializable {
 	@Column(name="cards_uuid")
 	private String cardsUuid;
 
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
 	@Column(name="submission_url")
 	private String submissionUrl;
+
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
 
 	public CSubmissionUrl() {
 	}
@@ -46,12 +49,28 @@ public class CSubmissionUrl implements Serializable {
 		this.cardsUuid = cardsUuid;
 	}
 
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public String getSubmissionUrl() {
 		return this.submissionUrl;
 	}
 
 	public void setSubmissionUrl(String submissionUrl) {
 		this.submissionUrl = submissionUrl;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }
